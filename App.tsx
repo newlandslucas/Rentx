@@ -6,7 +6,7 @@ import { useFonts, Inter_400Regular, Inter_500Medium } from '@expo-google-fonts/
 
 import theme from './src/styles/theme';
 
-import { CarDetails }  from './src/screens/CarDetails';
+import { Scheduling }  from './src/screens/Scheduling';
 
 export default function App() {
 
@@ -25,7 +25,7 @@ export default function App() {
   return (
     <>
     <ThemeProvider theme={theme}>
-      <CarDetails />
+      <Scheduling />
     </ThemeProvider>
     </>
   );
