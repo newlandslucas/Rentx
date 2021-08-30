@@ -1,4 +1,6 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import {Container, Header, CarImages, Wrapper, Content, Details, Description, Brand, Name, Rent, Period, Price, About, Acessories, Footer } from './style';
 
@@ -17,8 +19,19 @@ import peopleSvg from '../../assets/people.svg';
 
  
 export function CarDetails() {
+    const navigation = useNavigation();
+
+    function handleNavigation() {
+        navigation.navigate('Scheduling')
+    }
+
     return(
         <Container>
+            <StatusBar 
+                barStyle="dark-content"
+                translucent
+                backgroundColor="transparent"
+            />
             <Header>
                 <BackButton />
             </Header>
@@ -57,7 +70,7 @@ export function CarDetails() {
             </Content>
 
             <Footer>
-                <Button title="Escolher período do aluguel"/>
+                <Button title="Escolher período do aluguel" onPress={handleNavigation}/>
             </Footer>
         </Container>
     )
