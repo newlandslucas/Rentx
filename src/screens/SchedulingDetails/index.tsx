@@ -37,6 +37,7 @@ import { ImageSlider } from '../../components/ImageSlider';
 import { Accessory } from '../../components/Accessory';
 import { PhotoIndex } from '../../components/PhotoIndex'
 import { Button } from '../../components/Button';
+
 import { CarDTO } from '../../dtos/CarDTO'
 
 import speedSvg from '../../assets/speed.svg';
@@ -61,90 +62,87 @@ export function SchedulingDetails() {
     }
 
     function handleBack() {
-        navigation.navigate('Scheduling')
+        navigation.goBack()
     }
     return(
         <Container>
             <Header>
-                <StatusBar 
-                    barStyle="dark-content"
-                    translucent
-                    backgroundColor="transparent"
-                />
-                <BackButton onPress={handleBack}/>
+            <BackButton onPress={handleBack} />
             </Header>
+    
             <CarImages>
-                <ImageSlider imagesUrl={car.photos}/>
+            <ImageSlider 
+                imagesUrl={car.photos}
+            />
             </CarImages>
-
-            <Wrapper>
-                <PhotoIndex />
-            </Wrapper>
-
+    
             <Content>
-                <Details>
-                    <Description>
-                        <Brand>{car.brand}</Brand>
-                        <Name>{car.name}</Name>
-                    </Description>
-
-                    <Rent>
-                        <Period>{car.rent.period}</Period>
-                        <Price>R$ {car.rent.price}</Price>
-                    </Rent>
-                </Details>
-
-                <Accessories>
-                    {
-                        car.accessories.map(Acessory => (
-                        <Accessory 
-                            key={Acessory.type}
-                            name={Acessory.name}
-                            icon={speedSvg}
-                        />
-                        ))
-                    }
-                </Accessories>
-
-                <RentalPeriod>
-
-                    <CalendarIcon>
-                        <Feather
-                            name="calendar"
-                            size={RFValue(24)}
-                            color={theme.colors.shape}
-                        />
-                    </CalendarIcon>
-
-                    <DateInfo>
-                        <DateTitle>DE</DateTitle>
-                        <DateValue>27/08/2021</DateValue>
-                    </DateInfo>
-
-                    <Feather 
-                        name="chevron-right"
-                        size={RFValue(10)}
-                        color={theme.colors.text}
+            <Details>
+                <Description>
+                <Brand>{car.brand}</Brand>
+                <Name>{car.name}</Name>
+                </Description>
+    
+                <Rent>
+                <Period>{car.rent.period}</Period>
+                <Price>R$ {car.rent.price}</Price>
+                </Rent>
+            </Details>
+    
+            <Accessories>
+                { 
+                car.accessories.map(accessory => (
+                    <Accessory 
+                    key={accessory.type}
+                    name={accessory.name} 
+                    icon={speedSvg} 
                     />
-
-                    <DateInfo>
-                        <DateTitle>ATÉ</DateTitle>
-                        <DateValue>27/08/2021</DateValue>
-                    </DateInfo>
-                </RentalPeriod>
-
-                <RentalPrice>
-                    <RentalPriceLabel>TOTAL</RentalPriceLabel>
-                    <RentalPriceDetails>
-                        <RentalPriceQuota>R$ 1200.00 x3 diárias</RentalPriceQuota>
-                        <RentalPriceTotal>R$ 3600.00</RentalPriceTotal>
-                    </RentalPriceDetails>
-                </RentalPrice>
+                )) 
+                }
+            </Accessories>
+    
+            <RentalPeriod>
+                <CalendarIcon>
+                <Feather 
+                    name="calendar"
+                    size={RFValue(24)}
+                    color={theme.colors.shape}
+                />
+                </CalendarIcon>
+    
+                <DateInfo>
+                <DateTitle>DE</DateTitle>
+                <DateValue></DateValue>
+                </DateInfo>
+    
+                <Feather 
+                name="chevron-right"
+                size={RFValue(10)}
+                color={theme.colors.text}
+                />
+    
+                <DateInfo>
+                <DateTitle>ATÉ</DateTitle>
+                <DateValue></DateValue>
+                </DateInfo>
+            </RentalPeriod>
+            
+            <RentalPrice>
+                <RentalPriceLabel>Total</RentalPriceLabel>
+                <RentalPriceDetails>
+                <RentalPriceQuota></RentalPriceQuota>
+                <RentalPriceTotal></RentalPriceTotal>
+                </RentalPriceDetails>
+            </RentalPrice>
             </Content>
-
+            
             <Footer>
-                <Button title="Reservar" color={theme.colors.sucess} onPress={handleNavigation}/>
+            <Button 
+                title="Alugar agora"
+                color={theme.colors.sucess} 
+            />
+
             </Footer>
-        </Container>
-    )
-}
+      </Container>
+    );
+  }

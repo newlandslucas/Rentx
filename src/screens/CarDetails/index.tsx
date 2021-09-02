@@ -11,15 +11,10 @@ import { PhotoIndex } from '../../components/PhotoIndex'
 import { Button } from '../../components/Button';
 import { CarDTO } from '../../dtos/CarDTO';
 
-import speedSvg from '../../assets/speed.svg';
-import accelerationSvg from '../../assets/acceleration.svg';
-import forceSvg from '../../assets/force.svg';
-import gasolineSvg from '../../assets/gasoline.svg';
-import exchangeSvg from '../../assets/exchange.svg';
-import peopleSvg from '../../assets/people.svg';
+import { getAcessoryIcon } from '../../utils/getAcessoryIcon'
 
 interface Params {
-    car: CarDTO
+    car: CarDTO;
 }
  
 export function CarDetails() {
@@ -32,7 +27,7 @@ export function CarDetails() {
     }
 
     function handleBack() {
-        navigation.navigate('Home')
+        navigation.goBack();
     }
 
     return(
@@ -72,7 +67,7 @@ export function CarDetails() {
                         <Accessory 
                             key={Acessory.type}
                             name={Acessory.name}
-                            icon={speedSvg}
+                            icon={getAcessoryIcon(Acessory.type)}
                         />
                         ))
                     }
