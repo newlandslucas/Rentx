@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { StatusBar } from 'react-native';
 import { Feather } from '@expo/vector-icons'
 import { RFValue } from 'react-native-responsive-fontsize';
@@ -18,7 +18,7 @@ import {
     Rent, 
     Period, 
     Price, 
-    Acessories, 
+    Accessories, 
     Footer,
     RentalPeriod,
     CalendarIcon,
@@ -34,9 +34,10 @@ import {
 
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
-import { Acessory } from '../../components/Acessory';
+import { Accessory } from '../../components/Accessory';
 import { PhotoIndex } from '../../components/PhotoIndex'
 import { Button } from '../../components/Button';
+import { CarDTO } from '../../dtos/CarDTO'
 
 import speedSvg from '../../assets/speed.svg';
 import accelerationSvg from '../../assets/acceleration.svg';
@@ -45,13 +46,22 @@ import gasolineSvg from '../../assets/gasoline.svg';
 import exchangeSvg from '../../assets/exchange.svg';
 import peopleSvg from '../../assets/people.svg';
 
+interface Params {
+    car: CarDTO;
+}
  
 export function SchedulingDetails() {
     const theme = useTheme();
     const navigation = useNavigation();
+    const route = useRoute();
+    const { car } = route.params as Params;
 
     function handleNavigation() {
         navigation.navigate('SchedulingComplete')
+    }
+
+    function handleBack() {
+        navigation.navigate('Scheduling')
     }
     return(
         <Container>
@@ -61,10 +71,10 @@ export function SchedulingDetails() {
                     translucent
                     backgroundColor="transparent"
                 />
-                <BackButton />
+                <BackButton onPress={handleBack}/>
             </Header>
             <CarImages>
-                <ImageSlider imagesUrl={['https://production.autoforce.com/uploads/used_model/profile_image/21174070/model_main_comprar-rs-5-pcd-sportback-1165_fcdc130f2e.png']}/>
+                <ImageSlider imagesUrl={car.photos}/>
             </CarImages>
 
             <Wrapper>
@@ -74,24 +84,27 @@ export function SchedulingDetails() {
             <Content>
                 <Details>
                     <Description>
-                        <Brand>AUDI</Brand>
-                        <Name>RS5 Coupé</Name>
+                        <Brand>{car.brand}</Brand>
+                        <Name>{car.name}</Name>
                     </Description>
 
                     <Rent>
-                        <Period>Ao dia</Period>
-                        <Price>R$ 1200</Price>
+                        <Period>{car.rent.period}</Period>
+                        <Price>R$ {car.rent.price}</Price>
                     </Rent>
                 </Details>
 
-                <Acessories>
-                    <Acessory name="250Km/h" icon={speedSvg} />
-                    <Acessory name="4.6s" icon={accelerationSvg} />
-                    <Acessory name="450 HP" icon={forceSvg} />
-                    <Acessory name="Gasolina" icon={gasolineSvg} />
-                    <Acessory name="Auto" icon={exchangeSvg} />
-                    <Acessory name="4 Pessoas" icon={peopleSvg} />
-                </Acessories>
+                <Accessories>
+                    {
+                        car.accessories.map(Acessory => (
+                        <Accessory 
+                            key={Acessory.type}
+                            name={Acessory.name}
+                            icon={speedSvg}
+                        />
+                        ))
+                    }
+                </Accessories>
 
                 <RentalPeriod>
 
