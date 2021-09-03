@@ -15,14 +15,15 @@ export const Header = styled.View`
     height: 120px;
     background-color: ${({ theme }) => theme.colors.header};
 
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
     padding: 32px 24px;
 `;
 
 export const HeaderContent = styled.View`
-    flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    margin-top: 38px;
 `;
 
 export const TotalCars = styled.Text`

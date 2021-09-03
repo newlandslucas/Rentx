@@ -1,5 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
+import { useTheme } from 'styled-components';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 import {Container, Header, CarImages, Wrapper, Content, Details, Description, Brand, Name, Rent, Period, Price, About, Accessories, Footer } from './style';
@@ -18,6 +19,7 @@ interface Params {
 }
  
 export function CarDetails() {
+    const theme = useTheme();
     const navigation = useNavigation();
     const route = useRoute();
     const { car } = route.params as Params;
@@ -77,7 +79,7 @@ export function CarDetails() {
             </Content>
 
             <Footer>
-                <Button title="Escolher período do aluguel" onPress={handleNavigation}/>
+                <Button title="Escolher período do aluguel" onPress={handleNavigation} color={theme.colors.shape}/>
             </Footer>
         </Container>
     )

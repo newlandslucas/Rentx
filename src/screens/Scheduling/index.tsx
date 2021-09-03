@@ -8,9 +8,10 @@ import ArrowSvg from '../../assets/arrow.svg';
 
 import { BackButton } from '../../components/BackButton';
 import { Button } from '../../components/Button';
-import { Calendar } from '../../components/Calendar';
+import { Calendar, DayProps } from '../../components/Calendar';
 
 export function Scheduling() {
+    const [lastSelectedData, setLastSelectedData] = useState();
     const theme = useTheme();
     const navigation = useNavigation();
 
@@ -19,7 +20,11 @@ export function Scheduling() {
     }
 
     function handleBack() {
-        navigation.navigate('CarDetails')
+        navigation.goBack();
+    }
+
+    function handleChangeDate(day: DayProps) {
+
     }
 
     return(
@@ -56,7 +61,10 @@ export function Scheduling() {
                 </RentalPeriod>
             </Header>
             <Content>
-                <Calendar />
+                <Calendar
+                    markedDates={markedDates}
+                    onDayPress={handleChangeDate}
+                />
             </Content>
 
             <Footer>
