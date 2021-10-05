@@ -38,6 +38,5 @@ export const CarList = styled(FlatList as new () => FlatList<CarDTO>).attrs({
     },
     showsVerticalScrollIndicator: false
 })`
-
 `;
 
